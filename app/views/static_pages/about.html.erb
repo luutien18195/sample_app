@@ -1,12 +1,11 @@
-
-<% provide(:title, "About") %>
-<h1>About</h1>
+<% provide :title, t("about") %>
+<h1><%= t "about" %></h1>
 <p>
-  The <a href="http://www.railstutorial.org/"><em>Ruby on Rails
-  Tutorial</em></a> is a
-  <a href="http://www.railstutorial.org/book">book</a> and
-  <a href="http://screencasts.railstutorial.org/">screencast series</a>
-  to teach web development with
-  <a href="http://rubyonrails.org/">Ruby on Rails</a>.
-  This is the sample application for the tutorial.
+  The <em><%= link_to t("ror_tut"),
+   "http://www.railstutorial.org/" %></em> is a
+  <%= link_to t("book"),"http://www.railstutorial.org/book" %> and
+  <%= link_to t("series"),"http://screencasts.railstutorial.org/" %>
+  <%= t("abt")%>
+  <%= link_to t("ror"),"http://rubyonrails.org/" %>.
+  <%= t"ab_txt" %>
 </p>
