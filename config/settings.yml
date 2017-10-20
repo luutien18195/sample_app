@@ -1,3 +1,3 @@
-email_mx_leng: 255
-name_mx_leng: 50
-pass_mn_leng: 6
+max_length_name: 255
+max_length_email: 50
+min_length_password: 6
