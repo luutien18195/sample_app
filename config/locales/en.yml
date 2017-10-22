@@ -24,6 +24,7 @@ en:
   news: "News"
   profile: "Profile"
   rails_help: "Rails Tutorial help section"
+  remember_me: "Remember me on this computer "
   ror: "Ruby on Rails"
   ror_tut: "Ruby on Rails Tutorial"
   sample_app: "sample app"
@@ -37,3 +38,4 @@ en:
   to_get: "To get help on this sample app, see the"
   users: "Users"
   welcome: "Welcome to the Sample App"
+
