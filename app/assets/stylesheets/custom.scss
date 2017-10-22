@@ -77,6 +77,14 @@ p {
 
 /* forms */
 
+.checkbox {
+  margin: -10px 0 10px;
+  span {
+    font-weight: normal;
+    margin-left: 20px;
+  }
+}
+
 #error_explanation {
   color: red;
   ul {
@@ -104,6 +112,11 @@ select,
 
 input {
   height: auto !important;
+}
+
+#session_remember_me {
+  margin-left: 0;
+  width: auto;
 }
 
 /* header */
