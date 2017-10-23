@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
+
   before_save {email.downcase!}
+
   validates :name, presence: true,length: {maximum: Settings.max_length_name}
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :email, presence: true,
@@ -9,7 +11,10 @@ class User < ApplicationRecord
     uniqueness: {case_sensitive: false}
   has_secure_password
   validates :password, presence: true,
-    length: {minimum: Settings.min_length_password}
+    length: {minimum: Settings.min_length_password}, allow_nil: true
+
+  scope :select_id_name_email, ->{select :id, :name, :email }
+  scope :order_created_at, ->{order :created_at }
 
   class << self
     def digest string
@@ -23,6 +28,10 @@ class User < ApplicationRecord
     def self.new_token
       SecureRandom.urlsafe_base64
     end
+  end
+
+  def current_user? user
+    self == user
   end
 
   def remember

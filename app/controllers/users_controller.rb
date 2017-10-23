@@ -1,14 +1,16 @@
 class UsersController < ApplicationController
-  def new
-    @user = User.new
+  before_action :logged_in_user, except: %i(show new create)
+  before_action :verify_admin!, only: :destroy
+  before_action :correct_user, only: %i(edit update)
+  before_action :load_user, except: %i(index new create)
+
+  def index
+    @users = User.select_id_name_email.order_created_at
+      .paginate page: params[:page], per_page: Settings.per_page
   end
 
-  def show
-    @user = User.find_by id: params[:id]
-
-    return if @user
-    flash[:warning] = t "can_not_find_user"
-    redirect_to root_path
+  def new
+    @user = User.new
   end
 
   def create
@@ -23,10 +25,53 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit; end
+
+  def update
+    if @user.update_attributes user_params
+      flash[:success] = t "profile_updated"
+      redirect_to @user
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    if @user.destroy
+      flash[:success] = t "user_deleted"
+    else
+      flash[:danger] = t "user_can_not_delete"
+    end
+    redirect_to users_url
+  end
+
   private
 
   def user_params
     params.require(:user).permit :name, :email, :password,
       :password_confirmation
+  end
+
+  def logged_in_user
+    return if logged_in?
+    flash.now[:danger] = t "please_login"
+    redirect_to login_url
+  end
+
+  def correct_user
+    @user = User.find_by id: params[:id]
+    redirect_to root_path unless @user.current_user?(current_user)
+  end
+
+  def verify_admin!
+    redirect_to root_url unless current_user.is_admin?
+  end
+
+  def load_user
+    @user = User.find_by id: params[:id]
+
+    return if @user
+    flash[:warning] = t "can_not_find_user"
+    redirect_to root_path
   end
 end
