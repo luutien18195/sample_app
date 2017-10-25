@@ -13,6 +13,11 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def show
+    @microposts = @user.microposts.oder_by_created_at_desc
+      .paginate page: params[:page], per_page: Settings.per_page
+  end
+
   def create
     @user = User.new user_params
 
@@ -42,6 +47,7 @@ class UsersController < ApplicationController
     else
       flash[:danger] = t "user_can_not_delete"
     end
+
     redirect_to users_url
   end
 
@@ -50,12 +56,6 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit :name, :email, :password,
       :password_confirmation
-  end
-
-  def logged_in_user
-    return if logged_in?
-    flash.now[:danger] = t "please_login"
-    redirect_to login_url
   end
 
   def correct_user
