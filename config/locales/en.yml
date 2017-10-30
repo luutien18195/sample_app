@@ -20,6 +20,7 @@ en:
   micropost_deleted: "Micropost deleted"
   micropost_feed: "Micropost Feed"
   microposts_created: "Micropost created!"
+  not_found_object: "Not found this object, plese try again later ! "
   password_has_been_reset: "Password has been reset."
   password_reset_has_expired: "Password reset has expired."
   please_check_to_activate: "Please check your email to activate your account."
@@ -83,6 +84,9 @@ en:
     micropost_form:
       compose_new_micropost: "Compose new micropost..."
       post: "Post"
+    stats:
+      followers: "followers"
+      following: "following"
     user_info:
       microposts: "Microposts"
       view_my_profile: "view my profile"
@@ -130,6 +134,11 @@ en:
       text_this_link_will_expire: "This link will expire in two hours."
 
   users:
+    follow_html:
+      follow: "Follow"
+      un_follow: "Unfollow"
+      followers: "followers"
+      following: "following"
     user_html:
       delete: "delete"
       you_sure: "You sure?"
@@ -145,3 +154,4 @@ en:
       create_account: "Create my account"
     show:
       microposts: "Microposts"
+      view_my_profile: "view my profile"
